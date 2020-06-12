@@ -1,5 +1,6 @@
 import json
 import numpy as np
+from classes.baum import Baum 
 
 print(json.dumps({'a': 1, 'k': 4, 'b': 2}, sort_keys=True, indent=4))
 # read a file
@@ -24,8 +25,8 @@ def haversine_distance(lat1, lon1, lat2, lon2):
    res = r * (2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a)))
    return np.round(res, 2)
 
-lon1 = baeume[0]['geometry']['coordinates'][0]
-lat1 = baeume[0]['geometry']['coordinates'][1]
+lon1 = baeume[6]['geometry']['coordinates'][0]
+lat1 = baeume[6]['geometry']['coordinates'][1]
 lon2 = baeume[1]['geometry']['coordinates'][0]
 lat2 = baeume[1]['geometry']['coordinates'][1]
 print(str(haversine_distance(47.41093,8.56686,47.41102,8.56740)) + " km")
