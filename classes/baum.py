@@ -1,18 +1,22 @@
-class DBaum 
+from utils import haversine_distance
+class DBaum: 
 
     longitude = 0
     latitude = 0
-    visited = false
+    clusterId = -1 # -1 means unvisited, -2 means noise. >=0 are cluster ids
+    neighbors = []
 
     def __init__(self, latitude, longitude):
         self.latitude = latitude
         self.longitude = longitude
 
-    def setVisited(bool val)
-        self.visited = val
+    def setClusterId(self, clusterId):
+        self.clusterId = clusterId
 
-    def isVisited()
-        return self.visited
+    def getDistanceTo(self, baum):
+        # the returned distance between this and the given baum (in metre)
+        return 1000*haversine_distance(self.latitude, self.longitude, baum.latitude, baum.longitude) 
 
-    def getDistanceTo(baum)
-        return 0
+    def add_neighbor(self, baum):
+        if self is not baum:
+            self.neighbors.append(baum)

@@ -1,6 +1,8 @@
+import sys
+sys.path.append('classes')
+
 import json
-import numpy as np
-from classes.baum import Baum 
+from baum import DBaum
 
 # read a file
 with open('resources/data/kataster.json', 'r') as katasterfile:
@@ -8,30 +10,44 @@ with open('resources/data/kataster.json', 'r') as katasterfile:
 
 # parse the file
 obj = json.loads(data);
-#print(json.dumps(obj['features'], indent=4))
 baeume = obj['features']
 baumlist = []
 for baum in baeume:
     coord = baum['geometry']['coordinates']
-    b = Baum(coord[1],coord[0])
+    b = DBaum(coord[1],coord[0])
     baumlist.append(b)
 
-# test this formula
-def haversine_distance(lat1, lon1, lat2, lon2):
-   r = 6371
-   phi1 = np.radians(lat1)
-   phi2 = np.radians(lat2)
-   delta_phi = np.radians(lat2 - lat1)
-   delta_lambda = np.radians(lon2 - lon1)
-   a = np.sin(delta_phi / 2)**2 + np.cos(phi1) * np.cos(phi2) *   np.sin(delta_lambda / 2)**2
-   res = r * (2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a)))
-   return np.round(res, 2)
+#dbscan
+def add_neighbors(refbaum, baumlist, eps):
+    for baum in baumlist:
+       if refbaum == baum:
+           continue
+       if refbaum.getDistanceTo(baum) <= eps:
+           refbaum.add_neighbor(baum)
 
-lon1 = baeume[6]['geometry']['coordinates'][0]
-lat1 = baeume[6]['geometry']['coordinates'][1]
-lon2 = baeume[1]['geometry']['coordinates'][0]
-lat2 = baeume[1]['geometry']['coordinates'][1]
-print(str(haversine_distance(47.41093,8.56686,47.41102,8.56740)) + " km")
+def dbscan(dbaum_list, eps, min_pts):
+    clusters = -1 # count the number of clusters and is used for cluster id assignment 
+    for dbaum in dbaum_list:
+        if dbaum.clusterId >= 0:
+            continue
+        add_neighbors(dbaum, dbaum_list, eps)
+        if len(dbaum.neighbors) < min_pts:
+            dbaum.setClusterId(-2)
+            continue
+        clusters = clusters + 1
+        dbaum.setClusterId(clusters)
+        seed = dbaum.neighbors.copy() # cluster seed; contains potential baum for this cluster.
+        for potential_baum in seed:
+            if potential_baum.clusterId == -2:
+                potential_baum.setClusterId(clusters)
+            if potential_baum.clusterId >= 0: 
+                continue
+            potential_baum.setClusterId(clusters)
+            add_neighbors(potential_baum, dbaum_list, eps)
+            if len(potential_baum.neighbors) >= min_pts:
+                seed.extend(potential_baum.neighbors)
+    return clusters + 1
+print('There are ' + str(dbscan(baumlist, 20,5)) + ' clusters')
 
-print(str(haversine_distance(lat1, lon1, lat2, lon2)) + " km")
+#for dbaum in baumlist
 
