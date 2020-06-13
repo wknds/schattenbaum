@@ -56,6 +56,10 @@ print('There are ' + str(dbscan(baumlist, 20,5)) + ' clusters')
 rawJson = []
 for dbaum in baumlist:
     rawJson.append(dbaum.getDictForGeoJson())
+rawJson = {
+        "type": "FeatureCollection",
+        "features": rawJson
+        }
 
 # save as json file again
 json_file = open("result.json", "w")
