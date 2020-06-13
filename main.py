@@ -5,7 +5,8 @@ import json
 from baum import DBaum
 
 # read a file
-with open('resources/gsz.baumkataster_baumstandorte.json', 'r') as katasterfile:
+with open('resources/data/kataster.json', 'r') as katasterfile:
+#with open('resources/gsz.baumkataster_baumstandorte.json', 'r') as katasterfile:
     data = katasterfile.read()
 
 # parse the file

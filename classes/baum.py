@@ -24,8 +24,10 @@ class DBaum:
     def getDictForGeoJson(self):
         return {
                 "type": "Feature",
-                "geometry": "Point",
-                "coordinates": [self.longitude, self.latitude],
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [self.longitude, self.latitude]
+                },
                 "properties": {
                     "clusterid": self.clusterId
                     }
