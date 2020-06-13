@@ -1,6 +1,0 @@
-﻿Sie haben folgende Bestellung aufgegeben: 
-Name des Geodatensatzes: Baumkataster 
-Name des Ausschnittes: full
-Ausschnitt (falls definiert): 0, 0, 0,0 
-Zeitpunkt der Bearbeitung: 11.06.2020 - 15:51 
-
