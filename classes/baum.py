@@ -20,3 +20,13 @@ class DBaum:
     def add_neighbor(self, baum):
         if self is not baum:
             self.neighbors.append(baum)
+
+    def getDictForGeoJson(self):
+        return {
+                "type": "Feature",
+                "geometry": "Point",
+                "coordinates": [self.longitude, self.latitude],
+                "properties": {
+                    "clusterid": self.clusterId
+                    }
+                }

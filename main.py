@@ -5,7 +5,7 @@ import json
 from baum import DBaum
 
 # read a file
-with open('resources/data/kataster.json', 'r') as katasterfile:
+with open('resources/gsz.baumkataster_baumstandorte.json', 'r') as katasterfile:
     data = katasterfile.read()
 
 # parse the file
@@ -16,6 +16,8 @@ for baum in baeume:
     coord = baum['geometry']['coordinates']
     b = DBaum(coord[1],coord[0])
     baumlist.append(b)
+
+print('Read ' + str(len(baumlist)) + ' Baeume')
 
 #dbscan
 def add_neighbors(refbaum, baumlist, eps):
@@ -50,4 +52,11 @@ def dbscan(dbaum_list, eps, min_pts):
 print('There are ' + str(dbscan(baumlist, 20,5)) + ' clusters')
 
 #for dbaum in baumlist
+rawJson = []
+for dbaum in baumlist:
+    rawJson.append(dbaum.getDictForGeoJson())
 
+# save as json file again
+json_file = open("result.json", "w")
+json_file.write(json.dumps(rawJson,indent=4))
+json_file.close()
