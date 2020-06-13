@@ -2,18 +2,20 @@ import json
 import numpy as np
 from classes.baum import Baum 
 
-print(json.dumps({'a': 1, 'k': 4, 'b': 2}, sort_keys=True, indent=4))
 # read a file
 with open('resources/data/kataster.json', 'r') as katasterfile:
     data = katasterfile.read()
 
 # parse the file
 obj = json.loads(data);
-print(json.dumps(obj['features'], indent=4))
+#print(json.dumps(obj['features'], indent=4))
 baeume = obj['features']
+baumlist = []
 for baum in baeume:
-    print(baum['geometry']['coordinates'])
-    
+    coord = baum['geometry']['coordinates']
+    b = Baum(coord[1],coord[0])
+    baumlist.append(b)
+
 # test this formula
 def haversine_distance(lat1, lon1, lat2, lon2):
    r = 6371
