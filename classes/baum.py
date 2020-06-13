@@ -29,6 +29,6 @@ class DBaum:
                     "coordinates": [self.longitude, self.latitude]
                 },
                 "properties": {
-                    "clusterid": self.clusterId
+                    "name": self.clusterId
                     }
                 }

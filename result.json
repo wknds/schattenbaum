@@ -9,7 +9,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -22,7 +22,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -35,7 +35,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -48,7 +48,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -61,7 +61,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -74,7 +74,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -87,7 +87,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     },
     {
@@ -100,7 +100,7 @@
             ]
         },
         "properties": {
-            "clusterid": 0
+            "name": 0
         }
     }
 ]
